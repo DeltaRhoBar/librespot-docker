@@ -1,6 +1,11 @@
 # Stage 1: Builder
 FROM rust:latest AS builder
 
+RUN apt-get update && \
+    apt-get install -y alsa-lib-dev pulseaudio-dev build-base cmake clang-dev llvm-dev && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Set the working directory
 WORKDIR /app
 
@@ -15,7 +20,7 @@ FROM debian:latest
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y pulseaudio-dev && \
+    apt-get install -y pulseaudio && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
