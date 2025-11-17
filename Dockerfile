@@ -2,7 +2,7 @@
 FROM rust:latest AS builder
 
 RUN apt-get update && \
-    apt-get install -y alsa-lib-dev pulseaudio-dev build-base cmake clang-dev llvm-dev && \
+    apt-get install -y libpulse-dev libasound2-dev pkg-config build-base cmake clang-dev llvm-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
