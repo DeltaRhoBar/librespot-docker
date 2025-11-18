@@ -20,7 +20,7 @@ FROM debian:latest
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install -y pulseaudio && \
+    apt-get install -y pulseaudio curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
