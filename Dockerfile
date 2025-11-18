@@ -38,4 +38,4 @@ COPY ./pulse /etc/pulse
 USER librespot
 
 # Set the command to run the application
-CMD ["/usr/local/bin/librespot"]
+CMD ["/usr/local/bin/librespot", "--name='Bar Spotify'", "--backend pulse"]
