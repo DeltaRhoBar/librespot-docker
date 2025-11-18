@@ -34,7 +34,7 @@ RUN groupadd --gid 1000 librespot \
   && usermod -aG audio,pulse,pulse-access librespot \
   && chown -R librespot:librespot "$HOME"
 WORKDIR "$HOME"
-COPY ./ledfx_docker/pulse /etc/pulse
+COPY ./pulse /etc/pulse
 USER librespot
 
 # Set the command to run the application
