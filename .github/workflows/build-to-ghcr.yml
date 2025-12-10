@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  GHCR_IMAGE_NAME: ${{ env.REGISTRY }}/${{ github.actor }}/librespot-docker
+  GHCR_IMAGE_NAME: ghcr.io/${{ github.actor }}/librespot-docker
   GHCR_IMAGE_TAG: latest
   
 
