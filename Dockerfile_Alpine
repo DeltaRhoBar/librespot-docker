@@ -7,18 +7,18 @@ RUN echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/a
 RUN apk add --no-cache pulseaudio librespot@testing
 
 # setup librespot user
-ENV HOME="/home/librespot"
+ENV HOME="/home/librespot_user"
 
-RUN addgroup -g 1000 librespot \
-  && adduser -u 1000 -G librespot -D -h "$HOME" librespot \
-  && addgroup librespot audio \
-  && addgroup librespot pulse \
-  && addgroup librespot pulse-access \
-  && chown -R librespot:librespot "$HOME"
+RUN addgroup -g 1000 librespot_user \
+  && adduser -u 1000 -G librespot_user -D -h "$HOME" librespot_user \
+  && addgroup librespot_user audio \
+  && addgroup librespot_user pulse \
+  && addgroup librespot_user pulse-access \
+  && chown -R librespot_user:librespot_user "$HOME"
 
 WORKDIR "$HOME"
 COPY ./pulse /etc/pulse
-USER librespot
+USER librespot_user
 
 EXPOSE 3465/tcp 3465/udp
 
