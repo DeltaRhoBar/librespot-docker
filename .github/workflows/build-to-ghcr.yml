@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  GHCR_IMAGE_NAME: ${{ github.actor }}/librespot-docker
+  GHCR_IMAGE_NAME: ${{ toLower(github.actor) }}/librespot-docker
   GHCR_IMAGE_TAG: latest
   REGISTRY: ghcr.io
 
