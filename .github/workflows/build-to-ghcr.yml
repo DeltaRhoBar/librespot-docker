@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  GHCR_IMAGE_NAME: ${{ toLower(github.actor) }}/librespot-docker
+  GHCR_IMAGE_NAME: ${{ github.actor }}/librespot-docker
   GHCR_IMAGE_TAG: latest
   REGISTRY: ghcr.io
 
@@ -20,6 +20,11 @@ jobs:
       packages: write
       
     steps:
+
+      - name: Lowercase image tag
+        run: |
+          echo "IMAGE_TAG=${GHCR_IMAGE_NAME@L}:${GHCR_IMAGE_TAG}" >> "${GITHUB_ENV}"
+      
       # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v6
@@ -44,5 +49,5 @@ jobs:
           file: ./Dockerfile
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.GHCR_IMAGE_NAME }}:${{ env.GHCR_IMAGE_TAG }}
+          tags: ${{ env.IMAGE_TAG }}
         
