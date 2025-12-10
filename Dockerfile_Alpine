@@ -1,0 +1,18 @@
+FROM docker.io/library/alpine:edge
+
+# Install dependencies
+RUN apk add --no-cache pulseaudio
+
+# setup librespot user
+ENV HOME="/home/librespot"
+
+RUN groupadd --gid 1000 librespot \
+  && useradd --uid 1000 --gid 1000 --create-home --home-dir "$HOME" librespot \
+  && usermod -aG audio,pulse,pulse-access librespot \
+  && chown -R librespot:librespot "$HOME"
+WORKDIR "$HOME"
+COPY ./pulse /etc/pulse
+USER librespot
+
+# Set the command to run the application
+CMD ["/usr/local/bin/librespot", "--backend", "pulseaudio", "--name", "Bar Spotify", "--autoplay", "on", "--zeroconf-port", "3465", "--disable-credential-cache", "on"]
