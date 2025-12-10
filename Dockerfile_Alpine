@@ -1,5 +1,8 @@
 FROM docker.io/library/alpine:edge
 
+# Enable @testing tag to install from testing repository
+echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+
 # Install dependencies
 RUN apk add --no-cache pulseaudio librespot
 
