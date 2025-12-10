@@ -9,10 +9,13 @@ RUN apk add --no-cache pulseaudio librespot@testing
 # setup librespot user
 ENV HOME="/home/librespot"
 
-RUN groupadd --gid 1000 librespot \
-  && useradd --uid 1000 --gid 1000 --create-home --home-dir "$HOME" librespot \
-  && usermod -aG audio,pulse,pulse-access librespot \
+RUN addgroup -g 1000 librespot \
+  && adduser -u 1000 -G librespot -D -h "$HOME" librespot \
+  && addgroup librespot audio \
+  && addgroup librespot pulse \
+  && addgroup librespot pulse-access \
   && chown -R librespot:librespot "$HOME"
+
 WORKDIR "$HOME"
 COPY ./pulse /etc/pulse
 USER librespot
