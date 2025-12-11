@@ -1,7 +1,7 @@
 # Stage 1: Builder
 FROM rust:alpine AS builder
 
-RUN apk add --no-cache libpulse pulseaudio cargo alsa-lib-dev cargo-auditable rust-bindgen nasm cmake clang-libclang openssl-dev
+RUN apk add --no-cache libpulse pulseaudio cargo alsa-lib-dev cargo-auditable rust-bindgen nasm cmake clang-libclang openssl-dev git
 
 # Set the working directory
 WORKDIR /app
