@@ -29,7 +29,7 @@ RUN addgroup -g 1000 librespot_user \
   && addgroup librespot_user audio \
   && addgroup librespot_user pulse \
   && addgroup librespot_user pulse-access \
-  && chown -R librespot_user:librespot_user "$HOME"#
+  && chown -R librespot_user:librespot_user "$HOME"
 
 WORKDIR "$HOME"
 COPY ./pulse /etc/pulse
