@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  GHCR_IMAGE_NAME: ghcr.io/${{ github.actor }}/librespot-docker
+  GHCR_IMAGE_NAME: ghcr.io/deltarhobar/librespot-docker
   GHCR_IMAGE_TAG: latest
   
 
@@ -23,8 +23,14 @@ jobs:
     steps:
       - name: Lowercase IMAGE_TAG
         run: |
-          echo "IMAGE_TAG=${GHCR_IMAGE_NAME@L}:${GHCR_IMAGE_TAG}" >> "${GITHUB_ENV}"
-      
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            TAG="${GITHUB_REF#refs/tags/}"
+            TAG="${TAG,,}"
+            echo "IMAGE_TAG=${GHCR_IMAGE_NAME}:${TAG}" >> "$GITHUB_ENV"
+          else
+            echo "IMAGE_TAG=${GHCR_IMAGE_NAME}:${GHCR_IMAGE_TAG}" >> "$GITHUB_ENV"
+          fi
+          
       - name: Checkout code
         uses: actions/checkout@v6
         
